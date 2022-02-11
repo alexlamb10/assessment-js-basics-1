@@ -8,11 +8,34 @@ const reader = readline.createInterface({
   output: process.stdout,
 });
 
-
+// Get User's password
 reader.question("Please enter your password: ", function(password) {
-  if(password.length < 10){
-      console.log('Not a valid password. Must have 10+ characters')
-    }else{
+// Check for spaces
+  let space = false;
+  if(password.indexOf(' ') >= 1){
+      space = true;
+  }  
+  //Check for capital
+  let upperCase = false
+
+for(let i = 0; i < password.length; i++){
+  let char = password.charAt(i)
+  if (char === char.toUpperCase()){
+    upperCase = true;
+    break;
+  } else {
+    upperCase = false
+  }
+}
+//Check requirements and return message
+
+  if(password.length < 10 || password.length > 20){
+      console.log('Not a valid password. Password must be between 10-20 characters')
+    }else if (space === true){
+        console.log('Password cannot contain spaces')
+    }else if(upperCase === false){
+    console.log('Password must contain at least 1 capital letter')
+    }else  {
         console.log('Success!')
     }
 
